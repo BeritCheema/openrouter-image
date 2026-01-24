@@ -5,6 +5,12 @@ A Claude Code skill for generating images using Google's Gemini API.
 ## Install
 
 ```bash
+npx add-skill byrencheema/nano-banana-image
+```
+
+Or manually:
+
+```bash
 git clone https://github.com/byrencheema/nano-banana-image.git
 cd nano-banana-image
 ./install.sh
