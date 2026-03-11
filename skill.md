@@ -25,39 +25,37 @@ node scripts/nano_banana.js [options]
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--model` | Model to use: `flash` (fast) or `pro` (higher quality) | `flash` |
-| `--prompt` | Text prompt describing the image to generate | required |
-| `--input` | Path to input image for editing (flash only) | none |
+| `--model` | `flash` (fast) or `pro` (higher quality) | `flash` |
+| `--prompt` | Text prompt describing the image | required |
+| `--input` | Path to input image for editing | none |
 | `--out` | Output path for generated image | `outputs/output.png` |
 | `--aspect` | Aspect ratio: `1:1`, `16:9`, `9:16`, `4:3`, `3:4` | `1:1` |
 
 ### Models
 
-| Model | API Name | Features |
+| Model | API Name | Best for |
 |-------|----------|----------|
-| `flash` | `gemini-2.5-flash-image` | Fast, supports image editing, good quality |
-| `pro` | `imagen-4.0-generate-001` | Higher quality, text-to-image only |
+| `flash` | `gemini-3.1-flash-image-preview` | Fast generation, image editing |
+| `pro` | `gemini-3-pro-image-preview` | High-fidelity, complex prompts |
 
 ### Examples
 
 **Text to image:**
 ```bash
 node scripts/nano_banana.js \
-  --model flash \
   --prompt "A clean minimalist ninja logo, bold outline, white background" \
   --out outputs/logo.png
 ```
 
-**Widescreen background:**
+**Edit existing image:**
 ```bash
 node scripts/nano_banana.js \
-  --model flash \
-  --aspect 16:9 \
-  --prompt "Abstract background with purple and blue gradients, geometric shapes" \
-  --out outputs/background.png
+  --input inputs/room.png \
+  --prompt "Restyle this room as modern Japanese minimalism" \
+  --out outputs/room_edited.png
 ```
 
-**High quality generation:**
+**High quality widescreen:**
 ```bash
 node scripts/nano_banana.js \
   --model pro \
@@ -65,21 +63,6 @@ node scripts/nano_banana.js \
   --prompt "A cinematic product photo of a smartwatch on a reflective surface" \
   --out outputs/product.png
 ```
-
-**Edit existing image:**
-```bash
-node scripts/nano_banana.js \
-  --model flash \
-  --input inputs/room.png \
-  --prompt "Restyle this room as modern Japanese minimalism" \
-  --out outputs/room_edited.png
-```
-
-## How it works
-
-1. Script sends prompt to Gemini API with `responseModalities: ["TEXT", "IMAGE"]`
-2. Model generates image and returns base64-encoded data
-3. Script decodes and saves to output file
 
 ## Requirements
 
@@ -93,9 +76,3 @@ cd ~/.claude/skills/nano-banana-image
 bun install
 export GEMINI_API_KEY="your-key-here"
 ```
-
-## Rate Limits (Free Tier)
-
-- ~2-3 images per day
-- Resets at midnight Pacific Time
-- Upgrade billing for higher limits
