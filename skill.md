@@ -29,14 +29,17 @@ node scripts/nano_banana.js [options]
 | `--prompt` | Text prompt describing the image | required |
 | `--input` | Path to input image for editing | none |
 | `--out` | Output path for generated image | `outputs/output.png` |
-| `--aspect` | Aspect ratio: `1:1`, `16:9`, `9:16`, `4:3`, `3:4` | `1:1` |
+| `--aspect` | Aspect ratio: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `9:16`, `16:9`, `21:9` | `1:1` |
+| `--size` | Resolution: `1K`, `2K`, `4K` | `1K` |
 
 ### Models
 
 | Model | API Name | Best for |
 |-------|----------|----------|
-| `flash` | `gemini-3.1-flash-image-preview` | Fast generation, image editing |
-| `pro` | `gemini-3-pro-image-preview` | High-fidelity, complex prompts |
+| `flash` | `gemini-3.1-flash-image` (Nano Banana 2) | Fast generation, image editing |
+| `pro` | `gemini-3-pro-image` (Nano Banana Pro) | High-fidelity, complex prompts, 2K/4K |
+
+Both models support text-to-image and image editing (`--input`).
 
 ### Examples
 
@@ -55,11 +58,12 @@ node scripts/nano_banana.js \
   --out outputs/room_edited.png
 ```
 
-**High quality widescreen:**
+**High quality widescreen (Nano Banana Pro at 2K):**
 ```bash
 node scripts/nano_banana.js \
   --model pro \
   --aspect 16:9 \
+  --size 2K \
   --prompt "A cinematic product photo of a smartwatch on a reflective surface" \
   --out outputs/product.png
 ```

@@ -51,14 +51,15 @@ node scripts/nano_banana.js \
 | `--prompt` | Image description | required |
 | `--input` | Input image for editing | none |
 | `--out` | Output path | `outputs/output.png` |
-| `--aspect` | `1:1`, `16:9`, `9:16`, `4:3`, `3:4` | `1:1` |
+| `--aspect` | `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `9:16`, `16:9`, `21:9` | `1:1` |
+| `--size` | `1K`, `2K`, `4K` | `1K` |
 
 ### Models
 
 | Model | API Name | Features |
 |-------|----------|----------|
-| `flash` | `gemini-2.5-flash-image` | Fast, supports editing |
-| `pro` | `imagen-4.0-generate-001` | Higher quality |
+| `flash` | `gemini-3.1-flash-image` (Nano Banana 2) | Fast, supports editing |
+| `pro` | `gemini-3-pro-image` (Nano Banana Pro) | Higher fidelity, 2K/4K output |
 
 ## Rate Limits
 

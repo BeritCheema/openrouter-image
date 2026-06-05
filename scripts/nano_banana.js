@@ -5,15 +5,15 @@ import fs from "fs";
 import path from "path";
 
 const MODELS = {
-  flash: "gemini-3.1-flash-image-preview",
-  pro: "gemini-3-pro-image-preview",
+  flash: "gemini-3.1-flash-image",
+  pro: "gemini-3-pro-image",
 };
 
 function parseArgs(args) {
-  const result = { model: "flash", prompt: null, input: null, out: "outputs/output.png", aspect: "1:1" };
+  const result = { model: "flash", prompt: null, input: null, out: "outputs/output.png", aspect: "1:1", size: "1K" };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (["--model", "--prompt", "--input", "--out", "--aspect"].includes(arg) && args[i + 1]) {
+    if (["--model", "--prompt", "--input", "--out", "--aspect", "--size"].includes(arg) && args[i + 1]) {
       result[arg.slice(2)] = args[++i];
     }
   }
@@ -50,7 +50,7 @@ async function main() {
       contents: [{ role: "user", parts: contents }],
       config: {
         responseModalities: ["TEXT", "IMAGE"],
-        aspectRatio: args.aspect,
+        imageConfig: { aspectRatio: args.aspect, imageSize: args.size },
       },
     });
 
