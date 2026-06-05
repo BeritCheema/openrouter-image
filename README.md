@@ -38,7 +38,6 @@ Once installed, just ask Claude Code to generate images:
 cd ~/.claude/skills/nano-banana-image
 
 node scripts/nano_banana.js \
-  --model flash \
   --prompt "A minimalist logo" \
   --out output.png
 ```
@@ -47,19 +46,15 @@ node scripts/nano_banana.js \
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--model` | `flash` (fast) or `pro` (high quality) | `flash` |
 | `--prompt` | Image description | required |
 | `--input` | Input image for editing | none |
 | `--out` | Output path | `outputs/output.png` |
 | `--aspect` | `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `9:16`, `16:9`, `21:9` | `1:1` |
 | `--size` | `1K`, `2K`, `4K` | `1K` |
 
-### Models
+### Model
 
-| Model | API Name | Features |
-|-------|----------|----------|
-| `flash` | `gemini-3.1-flash-image` (Nano Banana 2) | Fast, supports editing |
-| `pro` | `gemini-3-pro-image` (Nano Banana Pro) | Higher fidelity, 2K/4K output |
+Uses `gemini-3-pro-image` (Nano Banana Pro) — high-fidelity text-to-image and image editing, with 2K/4K output.
 
 ## Rate Limits
 

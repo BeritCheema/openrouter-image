@@ -4,16 +4,21 @@ import { GoogleGenAI } from "@google/genai";
 import fs from "fs";
 import path from "path";
 
-const MODELS = {
-  flash: "gemini-3.1-flash-image",
-  pro: "gemini-3-pro-image",
+const MODEL = "gemini-3-pro-image";
+
+const MIME_TYPES = {
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
 };
 
 function parseArgs(args) {
-  const result = { model: "flash", prompt: null, input: null, out: "outputs/output.png", aspect: "1:1", size: "1K" };
+  const result = { prompt: null, input: null, out: "outputs/output.png", aspect: "1:1", size: "1K" };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (["--model", "--prompt", "--input", "--out", "--aspect", "--size"].includes(arg) && args[i + 1]) {
+    if (["--prompt", "--input", "--out", "--aspect", "--size"].includes(arg) && args[i + 1]) {
       result[arg.slice(2)] = args[++i];
     }
   }
@@ -29,7 +34,6 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.prompt) fail("Missing --prompt");
   if (!process.env.GEMINI_API_KEY) fail("Missing GEMINI_API_KEY environment variable");
-  if (!MODELS[args.model]) fail(`Unknown model: ${args.model}. Use 'flash' or 'pro'`);
 
   const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -37,7 +41,7 @@ async function main() {
   if (args.input) {
     contents.push({
       inlineData: {
-        mimeType: { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif" }[path.extname(args.input).toLowerCase()] || "image/png",
+        mimeType: MIME_TYPES[path.extname(args.input).toLowerCase()] || "image/png",
         data: fs.readFileSync(args.input).toString("base64"),
       },
     });
@@ -46,7 +50,7 @@ async function main() {
 
   try {
     const response = await client.models.generateContent({
-      model: MODELS[args.model],
+      model: MODEL,
       contents: [{ role: "user", parts: contents }],
       config: {
         responseModalities: ["TEXT", "IMAGE"],
@@ -64,7 +68,6 @@ async function main() {
     console.log(JSON.stringify({
       ok: true,
       outFiles: [args.out],
-      model: args.model,
       prompt: args.prompt.substring(0, 100) + (args.prompt.length > 100 ? "..." : ""),
     }));
   } catch (error) {

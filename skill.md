@@ -1,11 +1,11 @@
 ---
 name: nano-banana-image
-description: Generate and edit images using Google's Gemini image generation models.
+description: Generate and edit images using Google's Nano Banana Pro (Gemini 3 Pro Image) model.
 ---
 
 # nano-banana-image
 
-Generate and edit images using Google's Gemini image generation models.
+Generate and edit images using Google's Nano Banana Pro (`gemini-3-pro-image`) model.
 
 ## When to use this skill
 
@@ -25,21 +25,15 @@ node scripts/nano_banana.js [options]
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--model` | `flash` (fast) or `pro` (higher quality) | `flash` |
 | `--prompt` | Text prompt describing the image | required |
 | `--input` | Path to input image for editing | none |
 | `--out` | Output path for generated image | `outputs/output.png` |
 | `--aspect` | Aspect ratio: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `9:16`, `16:9`, `21:9` | `1:1` |
 | `--size` | Resolution: `1K`, `2K`, `4K` | `1K` |
 
-### Models
+### Model
 
-| Model | API Name | Best for |
-|-------|----------|----------|
-| `flash` | `gemini-3.1-flash-image` (Nano Banana 2) | Fast generation, image editing |
-| `pro` | `gemini-3-pro-image` (Nano Banana Pro) | High-fidelity, complex prompts, 2K/4K |
-
-Both models support text-to-image and image editing (`--input`).
+Uses `gemini-3-pro-image` (Nano Banana Pro) for all generation — high-fidelity text-to-image and image editing, with 2K/4K output.
 
 ### Examples
 
@@ -58,10 +52,9 @@ node scripts/nano_banana.js \
   --out outputs/room_edited.png
 ```
 
-**High quality widescreen (Nano Banana Pro at 2K):**
+**High quality widescreen at 2K:**
 ```bash
 node scripts/nano_banana.js \
-  --model pro \
   --aspect 16:9 \
   --size 2K \
   --prompt "A cinematic product photo of a smartwatch on a reflective surface" \
