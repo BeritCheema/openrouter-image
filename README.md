@@ -1,61 +1,36 @@
-# nano-banana-image
+# openrouter-image
 
-A Claude Code skill for generating images using Google's Gemini API.
+A Codex and Claude Code skill for generating and editing images with
+`openai/gpt-image-2` through OpenRouter. Transparent PNG requests are processed
+locally with `rembg` because GPT Image 2 does not expose native alpha output.
 
 ## Install
 
 ```bash
-npx add-skill byrencheema/nano-banana-image
-```
-
-Or manually:
-
-```bash
-git clone https://github.com/byrencheema/nano-banana-image.git
-cd nano-banana-image
+git clone https://github.com/BeritCheema/openrouter-image.git
+cd openrouter-image
 ./install.sh
+export OPENROUTER_API_KEY="your-key"
 ```
 
-Then add your API key to your shell config:
+The installer adds the skill to both `~/.codex/skills/openrouter-image` and
+`~/.claude/skills/openrouter-image`.
+
+## Use
 
 ```bash
-echo 'export GEMINI_API_KEY="your-key"' >> ~/.zshrc
+node scripts/openrouter_image.js \
+  --prompt "A minimalist fox logo" \
+  --out outputs/fox.png
 ```
 
-Get a key at [Google AI Studio](https://aistudio.google.com/apikey).
-
-## Usage
-
-Once installed, just ask Claude Code to generate images:
-
-> "Generate a logo for my app"
-> "Create a 16:9 abstract background"
-> "Edit this image to make it more colorful"
-
-## Manual Usage
+For a transparent PNG:
 
 ```bash
-cd ~/.claude/skills/nano-banana-image
-
-node scripts/nano_banana.js \
-  --prompt "A minimalist logo" \
-  --out output.png
+node scripts/openrouter_image.js \
+  --prompt "A minimalist fox logo" \
+  --remove-background \
+  --out outputs/fox-transparent.png
 ```
 
-### Options
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--prompt` | Image description | required |
-| `--input` | Input image for editing | none |
-| `--out` | Output path | `outputs/output.png` |
-| `--aspect` | `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `9:16`, `16:9`, `21:9` | `1:1` |
-| `--size` | `1K`, `2K`, `4K` | `1K` |
-
-### Model
-
-Uses `gemini-3-pro-image` (Nano Banana Pro) — high-fidelity text-to-image and image editing, with 2K/4K output.
-
-## Rate Limits
-
-Free tier: ~2-3 images/day (resets midnight PT)
+Run `node scripts/openrouter_image.js --help` for all supported arguments.

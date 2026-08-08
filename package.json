@@ -1,12 +1,13 @@
 {
-  "name": "nano-banana-image",
-  "version": "1.0.0",
-  "description": "Generate and edit images using Gemini's image generation models",
+  "name": "openrouter-image",
+  "version": "2.0.0",
+  "description": "Generate and edit images with GPT Image 2 through OpenRouter",
   "type": "module",
   "scripts": {
-    "generate": "node scripts/nano_banana.js"
+    "generate": "node scripts/openrouter_image.js",
+    "check": "node scripts/openrouter_image.js --help"
   },
-  "dependencies": {
-    "@google/genai": "^1.0.0"
+  "engines": {
+    "node": ">=18"
   }
 }

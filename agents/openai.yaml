@@ -1,0 +1,4 @@
+interface:
+  display_name: "GPT Image via OpenRouter"
+  short_description: "Generate and edit images with GPT Image 2"
+  default_prompt: "Use $openrouter-image to generate or edit an image with GPT Image 2."

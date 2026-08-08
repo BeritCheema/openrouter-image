@@ -1,4 +1,8 @@
 node_modules/
+.venv/
+uv.lock
+__pycache__/
+*.pyc
 bun.lock
 package-lock.json
 outputs/*.png
