@@ -57,7 +57,7 @@ revised source render.
 ## Requirements
 
 - Node.js 18 or newer
-- `OPENROUTER_API_KEY`
+- `OPENROUTER_KEY`
 - Python 3.11–3.13 for local background removal
 - The local environment created by `./install.sh`
 

@@ -144,8 +144,8 @@ async function main() {
     return;
   }
 
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) fail("Missing OPENROUTER_API_KEY environment variable");
+  const apiKey = process.env.OPENROUTER_KEY;
+  if (!apiKey) fail("Missing OPENROUTER_KEY environment variable");
 
   let response;
   try {

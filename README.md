@@ -10,7 +10,7 @@ locally with `rembg` because GPT Image 2 does not expose native alpha output.
 git clone https://github.com/BeritCheema/openrouter-image.git
 cd openrouter-image
 ./install.sh
-export OPENROUTER_API_KEY="your-key"
+export OPENROUTER_KEY="your-key"
 ```
 
 The installer adds the skill to both `~/.codex/skills/openrouter-image` and

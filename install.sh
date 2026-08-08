@@ -28,4 +28,4 @@ install_skill "$CODEX_SKILL_DIR" "Codex"
 install_skill "$CLAUDE_SKILL_DIR" "Claude Code"
 
 echo "Installed successfully for Codex and Claude Code."
-echo "Set OPENROUTER_API_KEY before generating images."
+echo "Set OPENROUTER_KEY before generating images."
